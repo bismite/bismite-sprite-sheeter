@@ -1,0 +1,22 @@
+name: Build MinGW
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  mingw-w64:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Install dependencies
+        run: sudo apt-get install mingw-w64
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - run: ./make.rb mingw
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/bismite-sprite-sheeter-mingw.tgz
+          asset_name: bismite-sprite-sheeter-mingw.tgz
+          tag: ${{ github.ref }}
+          overwrite: true
