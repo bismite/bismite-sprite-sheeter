@@ -78,5 +78,5 @@ File.write "build/licenses/bin_packing-0.2.0-LICENSE.txt",bp_license
 cp "README.md", "build/"
 exts_executable = TARGET=="mingw"?".exe":""
 Dir.chdir("build"){
-  run "tar zcf #{SPRITESHEETER}.tgz #{EXE_NAME} licenses/ README.md"
+  run "tar zcf #{SPRITESHEETER}-#{TARGET}.tgz #{EXE_NAME} licenses/ README.md"
 }
