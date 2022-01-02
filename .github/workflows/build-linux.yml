@@ -1,0 +1,24 @@
+name: Build Linux
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install libsdl2-dev libsdl2-image-dev clang
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - run: ./make.rb linux
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/bismite-sprite-sheeter-linux.tgz
+          asset_name: bismite-sprite-sheeter-linux.tgz
+          tag: ${{ github.ref }}
+          overwrite: true
