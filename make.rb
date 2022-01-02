@@ -64,6 +64,7 @@ Dir.chdir("build"){
 #
 # License
 #
+mkdir_p "build/licenses/"
 cp "src/mruby-and-libraries-licenses.txt", "build/licenses/"
 cp "LICENSE", "build/licenses/#{SPRITESHEETER}-LICENSE.txt"
 bp_license = <<-EOS

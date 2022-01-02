@@ -68,9 +68,12 @@ when "macos"
     cp_r "SDL-macOS-UniversalBinaries/include", "./", remove_destination:true
     cp_r "SDL-macOS-UniversalBinaries/lib", "./", remove_destination:true
     cp_r "SDL-macOS-UniversalBinaries/licenses", "./", remove_destination:true
+    rm Dir["licenses/mpg123-*"]
+    rm Dir["licenses/SDL2_mixer-*"]
   }
 when "linux"
   # nop
 when "mingw"
-  # nop
+  rm Dir["licenses/mpg123-*"]
+  rm Dir["licenses/SDL2_mixer-*"]
 end
