@@ -7,8 +7,8 @@ tex = Bi::Texture.new("out.png",false)
 dat = MessagePack.unpack(File.read("out.dat"))
 
 # test
-check = Bi::TextureMapping.new(tex,*dat["test/assets/check.png"]).to_sprite
-tester = Bi::TextureMapping.new(tex,*dat["test/assets/tester.png"]).to_sprite
+check = Bi::TextureMapping.new(tex,*dat["assets/check.png"]).to_sprite
+tester = Bi::TextureMapping.new(tex,*dat["assets/tester.png"]).to_sprite
 tester.set_position 16,16
 
 # layer

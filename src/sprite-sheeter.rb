@@ -59,9 +59,12 @@ puts "#{CANVAS_W},#{CANVAS_W} Margin:#{MARGIN} Src:#{SRCDIR} Dst:#{DSTDIR} Heuri
 bin = BinPacking::Bin.new(CANVAS_W, CANVAS_H, HEURISTICS)
 canvas= Image.new CANVAS_W,CANVAS_H
 files = Files.new(SRCDIR).files
+basename = File.basename(SRCDIR)
+baselen = SRCDIR.size
 boxes = files.map{|f|
   img = Image.read(f)
-  box = Rectangle.new( img.w+MARGIN*2, img.h+MARGIN*2, img, f )
+  filename = File.join(basename, f[baselen..-1])
+  box = Rectangle.new( img.w+MARGIN*2, img.h+MARGIN*2, img, filename )
   box.can_rotate = false
   box
 }.sort{|a,b| (b.width*b.height) <=> (a.width*a.height) }
