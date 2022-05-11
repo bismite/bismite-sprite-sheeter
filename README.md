@@ -3,9 +3,48 @@
 <https://github.com/bismite/bismite-sprite-sheeter>
 
 ## Usage
-`bismite-sprite-sheeter CanvasWidth[px] CanvasHeight[px] Margin[px] srcdir dstdir`
+
+```
+bismite-sprite-sheeter path/to/src/dir path/to/dst/dir
+```
+
+This command refers to `config.json` and `crop.json` in the source directory.
+
+### config.json
+
+```
+{
+  "width": 4096,
+  "height": 4096,
+  "margin": 2,
+  "heuristics": "BottomLeft",
+  "exclude_crop": ["foo/bar"],
+  "sort": "random"
+}
+```
+
+- heuristics
+  - `BottomLeft`
+  - `BestAreaFit`
+  - `BestLongSideFit`
+  - `BestShortSideFit`
+- sort
+  - `longer`
+  - `height`
+  - `width`
+  - `area`
+  - `random`
+  - `name`
+
+### crop.json
+
+```
+[
+  ["foo/bar/cropped.png", [XinOriginalImage, YinOriginalImage, OriginalImageW, OriginalImageH]]
+]
+```
 
 # License
-Copyright 2021 kbys <work4kbys@gmail.com>
+Copyright 2021-2022 kbys <work4kbys@gmail.com>
 
 Apache License Version 2.0

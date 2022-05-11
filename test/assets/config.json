@@ -1,0 +1,8 @@
+{
+  "width": 512,
+  "height": 512,
+  "margin": 2,
+  "exclude_crop": ["face02.png"],
+  "heuristics": "BestLongSideFit",
+  "sort": "name"
+}
