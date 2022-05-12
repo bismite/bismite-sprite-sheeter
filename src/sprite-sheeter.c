@@ -68,26 +68,26 @@ uint32_t bi_crc32(uint32_t crc, const void* buf, size_t size)
 static void mrb_image_free(mrb_state *mrb,void* p){ SDL_FreeSurface(p); }
 static struct mrb_data_type const mrb_image_data_type = { "Image", mrb_image_free };
 
-static inline bool search_v(SDL_Surface*img,int x)
+static inline bool is_transparent_v(SDL_Surface*img,int x)
 {
   uint32_t* pixels = img->pixels;
   for(int y=0; y<img->h; y++){
     if( (pixels[y*img->w+x] & img->format->Amask) != 0 ){
-      return true;
+      return false;
     }
   }
-  return false;
+  return true;
 }
 
-static inline bool search_h(SDL_Surface*img,int y)
+static inline bool is_transparent_h(SDL_Surface*img,int y)
 {
   uint32_t* pixels = img->pixels;
   for(int x=0; x<img->w; x++){
     if( (pixels[y*img->w+x] & img->format->Amask) != 0 ){
-      return true;
+      return false;
     }
   }
-  return false;
+  return true;
 }
 
 static inline bool crop_check(SDL_Surface*img,SDL_Rect* crop)
@@ -102,29 +102,27 @@ static inline bool crop_check(SDL_Surface*img,SDL_Rect* crop)
   crop->w = img->w;
   crop->h = img->h;
   if(img->format->format != SDL_PIXELFORMAT_ARGB8888){
+    printf("Unsupported Format.\n");
     return false;
   }
 
   // count transparent pixel length @ top
-  for(int y=0; y<img->h; y++){
-    top = y;
-    if( search_h(img,y) ) break;
+  for(top=0; top<img->h && is_transparent_h(img,top); top++);
+  // Transparent
+  if(top==img->h){
+    printf("all pixels transparent\n");
+    crop->x = 0;
+    crop->y = 0;
+    crop->w = 1;
+    crop->h = 1;
+    return true;
   }
   // bottom
-  for(int y=img->h-1; y>=0; y--){
-    bottom = y;
-    if( search_h(img,y) ) break;
-  }
+  for(bottom=img->h-1; bottom>=0 && is_transparent_h(img,bottom); bottom--);
   // left
-  for(int x=0; x<img->w; x++){
-    left = x;
-    if( search_v(img,x) ) break;
-  }
+  for(left=0; left<img->w && is_transparent_v(img,left); left++);
   // right
-  for(int x=img->w-1; x>=0; x--){
-    right = x;
-    if( search_v(img,x) ) break;
-  }
+  for(right=img->w-1; right>=0 && is_transparent_v(img,right); right--);
 
   crop->x = left;
   crop->y = top;
