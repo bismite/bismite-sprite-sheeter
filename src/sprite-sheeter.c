@@ -101,10 +101,6 @@ static inline bool crop_check(SDL_Surface*img,SDL_Rect* crop)
   crop->y = 0;
   crop->w = img->w;
   crop->h = img->h;
-  if(img->format->format != SDL_PIXELFORMAT_ARGB8888){
-    printf("Unsupported Format.\n");
-    return false;
-  }
 
   // count transparent pixel length @ top
   for(top=0; top<img->h && is_transparent_h(img,top); top++);
@@ -151,6 +147,16 @@ static mrb_value mrb_bi_image_read(mrb_state *mrb, mrb_value self)
   mrb_bool crop_enabled;
   mrb_get_args(mrb, "zb", &path,&crop_enabled);
   SDL_Surface* img = IMG_Load(path);
+
+  if(img->format->format != SDL_PIXELFORMAT_ARGB8888){
+    SDL_Surface* tmp = SDL_ConvertSurfaceFormat(img,SDL_PIXELFORMAT_ARGB8888,0);
+    if(tmp==NULL){
+       printf("SDL_ConvertSurfaceFormat Error:%s\n",SDL_GetError());
+    }
+    SDL_FreeSurface(img);
+    img = tmp;
+  }
+
   SDL_SetSurfaceBlendMode(img,SDL_BLENDMODE_NONE);
   struct RClass *klass = mrb_class_get(mrb,"Image");
   struct RData *data = mrb_data_object_alloc(mrb,klass,img,&mrb_image_data_type);
