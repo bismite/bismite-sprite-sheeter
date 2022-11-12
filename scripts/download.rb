@@ -24,9 +24,9 @@ downloads = {
     https://github.com/bismite/msgpack-c-binary/releases/download/0.1.12/msgpack-c-macos.tgz
     msgpack-c-macos.tgz
     5950b8e7925bf21a938e8c9c9dce31fd
-    https://github.com/bismite/SDL-macOS-UniversalBinaries/releases/download/1.2/SDL-macOS-UniversalBinaries.tgz
+    https://github.com/bismite/SDL-macOS-UniversalBinaries/releases/download/1.3.1/SDL-macOS-UniversalBinaries.tgz
     SDL-macOS-UniversalBinaries.tgz
-    bd9ffdf08e908da2b88c3222205ca701
+    f80cb577a38ad6bfa2f24f1463d8adb8
   ),
   "mingw" => %w(
     https://github.com/bismite/SDL-x86_64-w64-mingw32/releases/download/0.3.2/SDL-x86_64-w64-mingw32.tgz
