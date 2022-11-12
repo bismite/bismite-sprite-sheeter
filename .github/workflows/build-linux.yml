@@ -17,8 +17,6 @@ jobs:
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: build/bismite-sprite-sheeter-linux.tgz
           asset_name: bismite-sprite-sheeter-linux-${{github.ref_name}}.tgz
-          tag: ${{ github.ref }}
           overwrite: true
