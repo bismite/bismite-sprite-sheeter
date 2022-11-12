@@ -45,7 +45,7 @@ This command refers to `config.json` and `crop.json` in the source directory.
 ```
 
 # Changelog
-## 2.0.2 2022/11/12
+## 2.0.3 2022/11/12
 - SDL update(macos/mingw)
 
 # License
