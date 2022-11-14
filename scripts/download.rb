@@ -16,14 +16,8 @@ common_downloads = %w(
 )
 downloads = {
   "linux" => %w(
-    https://github.com/bismite/msgpack-c-binary/releases/download/0.1.12/msgpack-c-linux.tgz
-    msgpack-c-linux.tgz
-    36f44c77a3b4cd702063323d185e0b9e
   ),
   "macos" => %w(
-    https://github.com/bismite/msgpack-c-binary/releases/download/0.1.12/msgpack-c-macos.tgz
-    msgpack-c-macos.tgz
-    5950b8e7925bf21a938e8c9c9dce31fd
     https://github.com/bismite/SDL-macOS-UniversalBinaries/releases/download/1.3.1/SDL-macOS-UniversalBinaries.tgz
     SDL-macOS-UniversalBinaries.tgz
     f80cb577a38ad6bfa2f24f1463d8adb8
@@ -32,9 +26,6 @@ downloads = {
     https://github.com/bismite/SDL-x86_64-w64-mingw32/releases/download/1.1.1/SDL-x86_64-w64-mingw32.tgz
     SDL-x86_64-w64-mingw32.tgz
     9d4f107c123ee8a05e697e3dae453f99
-    https://github.com/bismite/msgpack-c-binary/releases/download/0.1.12/msgpack-c-x86_64-w64-mingw32.tgz
-    msgpack-c-x86_64-w64-mingw32.tgz
-    fa27a75e956fd34f0c4436e2caf36aca
   )
 }
 
@@ -57,9 +48,7 @@ downloads = {
 
 Dir.chdir("build"){
   ln_sf "mruby-3.0.0", "mruby"
-  cp_r "msgpack-c/include", "./", remove_destination:true
   mkdir_p "lib"
-  cp_r "msgpack-c/lib/libmsgpackc.a", "./lib/", remove_destination:true
 }
 
 case TARGET

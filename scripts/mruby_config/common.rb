@@ -8,5 +8,4 @@ def include_gems(conf,target)
   end
   conf.gem github: 'iij/mruby-dir'
   conf.gem github: 'iij/mruby-iijson'
-  conf.gem github: "bismite/mruby-simplemsgpack"
 end

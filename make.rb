@@ -49,13 +49,13 @@ DEFINES="-DMRB_INT64 -DMRB_UTF8_STRING -DMRB_NO_BOXING"
 Dir.chdir("build"){
   case TARGET
   when "macos"
-    run "clang -Wall -O2 -std=gnu11 sprite-sheeter.c -o #{EXE_NAME} #{DEFINES} -Iinclude -Iinclude/SDL2 -Llib -lmruby lib/libSDL2.a lib/libSDL2_image.a lib/libmsgpackc.a -liconv -lm -framework OpenGL -Wl,-framework,CoreAudio -Wl,-framework,AudioToolbox -Wl,-weak_framework,CoreHaptics -Wl,-weak_framework,GameController -Wl,-framework,ForceFeedback -lobjc -Wl,-framework,CoreVideo -Wl,-framework,Cocoa -Wl,-framework,Carbon -Wl,-framework,IOKit -Wl,-weak_framework,QuartzCore -Wl,-weak_framework,Metal"
+    run "clang -Wall -O2 -std=gnu11 sprite-sheeter.c -o #{EXE_NAME} #{DEFINES} -Iinclude -Iinclude/SDL2 -Llib -lmruby lib/libSDL2.a lib/libSDL2_image.a -liconv -lm -framework OpenGL -Wl,-framework,CoreAudio -Wl,-framework,AudioToolbox -Wl,-weak_framework,CoreHaptics -Wl,-weak_framework,GameController -Wl,-framework,ForceFeedback -lobjc -Wl,-framework,CoreVideo -Wl,-framework,Cocoa -Wl,-framework,Carbon -Wl,-framework,IOKit -Wl,-weak_framework,QuartzCore -Wl,-weak_framework,Metal"
     run "strip #{EXE_NAME}"
   when "linux"
-    run "clang -Wall -O2 -std=gnu11 sprite-sheeter.c -o #{EXE_NAME} #{DEFINES} -Iinclude -Llib -lmruby -lm -lmsgpackc `sdl2-config --cflags --libs` -lSDL2_image"
+    run "clang -Wall -O2 -std=gnu11 sprite-sheeter.c -o #{EXE_NAME} #{DEFINES} -Iinclude -Llib -lmruby -lm `sdl2-config --cflags --libs` -lSDL2_image"
     run "strip #{EXE_NAME}"
   when "mingw"
-    slibs = %w(mruby SDL2main SDL2 SDL2_image msgpackc).map{|l| "lib/lib#{l}.a" }.join(" ")
+    slibs = %w(mruby SDL2main SDL2 SDL2_image).map{|l| "lib/lib#{l}.a" }.join(" ")
     run "x86_64-w64-mingw32-gcc sprite-sheeter.c -o #{EXE_NAME} #{DEFINES} -Iinclude -Iinclude/SDL2 -Llib -lmingw32 -lmruby #{slibs} -lopengl32 -lws2_32 -mwindows -Wl,--dynamicbase -Wl,--nxcompat -Wl,--high-entropy-va -lm -ldinput8 -ldxguid -ldxerr8 -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lsetupapi -lversion -luuid"
     run "x86_64-w64-mingw32-strip #{EXE_NAME}"
   end

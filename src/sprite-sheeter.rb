@@ -75,6 +75,7 @@ end
 # initialize
 #
 if ARGV.size!=2
+  puts "bismite-sprite-sheeter ver3.0.0"
   puts "usage: bismite-sprite-sheeter srcdir dstdir"
   exit 1
 end
@@ -203,5 +204,4 @@ dat += dups.map{|d| pack_dat( d.filename, crc_to_box[d.img.crc], crop_list[d.fil
 #
 # Save
 #
-File.open( File.join(DSTDIR,"sheet.dat"), "wb"){|f| f.write dat.to_msgpack }
 File.open( File.join(DSTDIR,"sheet.json"), "wb"){|f| f.write dat.to_json }

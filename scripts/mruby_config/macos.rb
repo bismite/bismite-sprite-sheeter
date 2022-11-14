@@ -3,7 +3,7 @@ require_relative "common.rb"
 
 SCRIPTS_DIR = File.expand_path File.join __dir__, "..", "..", "scripts"
 INSTALL_PREFIX = BUILD_DIR
-LIBS = %w(SDL2 SDL2_image msgpackc)
+LIBS = %w(SDL2 SDL2_image)
 INCLUDES = %w(include include/SDL2).map{|i| "#{INSTALL_PREFIX}/#{i}" }
 COMMON_CFLAGS = %w(-Wall -Werror-implicit-function-declaration -Wwrite-strings -std=gnu11 -O3)
 COMMON_DEFINES = %w(MRB_INT64 MRB_UTF8_STRING MRB_NO_BOXING)

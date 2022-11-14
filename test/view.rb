@@ -4,7 +4,7 @@ Bi.init 480,320,title:__FILE__,highdpi:false
 
 # Sprite Sheet
 tex = Bi::Texture.new "sheet_0.png"
-dat = MessagePack.unpack(File.read("sheet.dat")).map{|d|
+dat = JSON.load(File.read("sheet.json")).map{|d|
   name = d.shift
   num = d.shift # trash
   p [name,d]

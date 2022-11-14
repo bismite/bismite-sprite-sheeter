@@ -22,6 +22,6 @@ MRuby::CrossBuild.new('linux') do |conf|
   conf.linker do |linker|
     linker.command = "clang"
     linker.library_paths += [ "#{BUILD_DIR}/lib", "#{BUILD_DIR}/mruby/build/linux/lib"]
-    linker.libraries += %W(msgpackc SDL2 SDL2_image)
+    linker.libraries += %W(SDL2 SDL2_image)
   end
 end

@@ -6,42 +6,22 @@ builds:
   macos-arm64:
     https://github.com/iij/mruby-dir.git:
       url: https://github.com/iij/mruby-dir.git
-      branch: master
+      branch: HEAD
       commit: 89dceefa1250fb1ae868d4cb52498e9e24293cd1
       version: 0.0.0
     https://github.com/iij/mruby-iijson.git:
       url: https://github.com/iij/mruby-iijson.git
-      branch: master
+      branch: HEAD
       commit: c5e730c30090d3cddae258f57ab9508edb3e9fce
-      version: 0.0.0
-    https://github.com/bismite/mruby-simplemsgpack.git:
-      url: https://github.com/bismite/mruby-simplemsgpack.git
-      branch: master
-      commit: '09faa4fc038737fe321c69a0341c0c9ca276c656'
-      version: 0.0.0
-    https://github.com/iij/mruby-errno.git:
-      url: https://github.com/iij/mruby-errno.git
-      branch: master
-      commit: b4415207ff6ea62360619c89a1cff83259dc4db0
       version: 0.0.0
   macos-x86_64:
     https://github.com/iij/mruby-dir.git:
       url: https://github.com/iij/mruby-dir.git
-      branch: master
+      branch: HEAD
       commit: 89dceefa1250fb1ae868d4cb52498e9e24293cd1
       version: 0.0.0
     https://github.com/iij/mruby-iijson.git:
       url: https://github.com/iij/mruby-iijson.git
-      branch: master
+      branch: HEAD
       commit: c5e730c30090d3cddae258f57ab9508edb3e9fce
-      version: 0.0.0
-    https://github.com/bismite/mruby-simplemsgpack.git:
-      url: https://github.com/bismite/mruby-simplemsgpack.git
-      branch: master
-      commit: '09faa4fc038737fe321c69a0341c0c9ca276c656'
-      version: 0.0.0
-    https://github.com/iij/mruby-errno.git:
-      url: https://github.com/iij/mruby-errno.git
-      branch: master
-      commit: b4415207ff6ea62360619c89a1cff83259dc4db0
       version: 0.0.0

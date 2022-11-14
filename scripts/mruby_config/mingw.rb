@@ -26,7 +26,7 @@ MRuby::CrossBuild.new('mingw') do |conf|
     linker.library_paths << "#{BUILD_DIR}/bin"
     linker.library_paths << "#{BUILD_DIR}/lib"
     linker.library_paths << "#{BUILD_DIR}/mruby/build/mingw/lib"
-    linker.libraries += %w(opengl32 ws2_32 msgpackc mingw32 SDL2main SDL2 SDL2_image)
+    linker.libraries += %w(opengl32 ws2_32 mingw32 SDL2main SDL2 SDL2_image)
     linker.flags_after_libraries << "-static-libgcc -mconsole"
   end
 
