@@ -1,0 +1,11 @@
+---
+mruby:
+  version: 3.2.0
+  release_no: 30200
+builds:
+  macos-arm64:
+    https://github.com/iij/mruby-iijson.git:
+      url: https://github.com/iij/mruby-iijson.git
+      branch: HEAD
+      commit: c5e730c30090d3cddae258f57ab9508edb3e9fce
+      version: 0.0.0
