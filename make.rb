@@ -68,6 +68,7 @@ ENV["MRUBY_CONFIG"] = File.absolute_path "mruby_config/#{TARGET}.rb"
 ENV["ARCH"] = "arm64"  if TARGET.end_with?("-arm64")
 ENV["ARCH"] = "x86_64" if TARGET.end_with?("-x86_64")
 ENV["MRUBY_CONFIG"] = File.absolute_path "mruby_config/macos.rb" if TARGET.start_with?("macos")
+rm ENV["MRUBY_CONFIG"]+".lock"
 Dir.chdir("#{PREFIX}/mruby-3.2.0"){ run "rake" }
 # install mruby
 Dir.chdir(PREFIX){
