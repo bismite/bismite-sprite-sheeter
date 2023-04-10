@@ -1,4 +1,4 @@
-name: Build macOS
+name: Build macOS arm64
 on:
   push:
     tags:
@@ -9,10 +9,10 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      - run: ./make.rb macos
+      - run: ./make.rb macos-arm64
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
-          file: build/bismite-sprite-sheeter-macos.tgz
-          asset_name: bismite-sprite-sheeter-macos-${{github.ref_name}}.tgz
+          file: build/macos-arm64/bismite-sprite-sheeter.tgz
+          asset_name: bismite-sprite-sheeter-macos-arm64-${{github.ref_name}}.tgz
           overwrite: true

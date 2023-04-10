@@ -10,13 +10,13 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install libsdl2-dev libsdl2-image-dev clang
+          sudo apt install clang
       - name: Check out repository code
         uses: actions/checkout@v3
       - run: ./make.rb linux
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
-          file: build/bismite-sprite-sheeter-linux.tgz
+          file: build/linux/bismite-sprite-sheeter.tgz
           asset_name: bismite-sprite-sheeter-linux-${{github.ref_name}}.tgz
           overwrite: true
