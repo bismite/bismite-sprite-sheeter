@@ -1,0 +1,12 @@
+diff --git a/mrbgems/mruby-time/src/time.c b/mrbgems/mruby-time/src/time.c
+index 6b9762acf..100c0187a 100644
+--- a/mrbgems/mruby-time/src/time.c
++++ b/mrbgems/mruby-time/src/time.c
+@@ -82,7 +82,7 @@ double round(double x) {
+
+ /** end of Time class configuration */
+
+-#if (defined(_POSIX_TIMERS) && _POSIX_TIMERS > 0) && defined(CLOCK_REALTIME)
++#if (defined(_POSIX_TIMERS) && _POSIX_TIMERS > 0) && defined(CLOCK_REALTIME) && !defined(DISABLE_CLOCK_GETTIME)
+ # define USE_CLOCK_GETTIME
+ #endif

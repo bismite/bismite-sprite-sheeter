@@ -1,6 +1,8 @@
 require_relative "common.rb"
 
-SCRIPTS_DIR = File.expand_path File.join __dir__, "..", "..", "scripts"
+INSTALL_PREFIX = "#{BUILD_DIR}/mingw"
+LIBS = %w(SDL2 SDL2_image)
+INCLUDES = %w(include include/SDL2).map{|i| "#{INSTALL_PREFIX}/#{i}" }
 
 MRuby::Build.new do |conf|
   toolchain :clang
@@ -14,20 +16,19 @@ MRuby::CrossBuild.new('mingw') do |conf|
 
   conf.cc do |cc|
     cc.command = 'x86_64-w64-mingw32-gcc'
-    cc.defines += %w(MRB_INT64 MRB_UTF8_STRING MRB_NO_BOXING)
-    cc.include_paths << "#{BUILD_DIR}/include"
-    cc.include_paths << "#{BUILD_DIR}/include/SDL2"
-    cc.flags = %W(-O3 -std=gnu11 -DNDEBUG -Wall -Werror-implicit-function-declaration -Wwrite-strings)
+    cc.defines += COMMON_DEFINES + %w(DISABLE_CLOCK_GETTIME)
+    cc.include_paths += INCLUDES
+    cc.flags = COMMON_CFLAGS
     cc.flags << "-Dmain=SDL_main"
   end
 
   conf.linker do |linker|
     linker.command = 'x86_64-w64-mingw32-gcc'
-    linker.library_paths << "#{BUILD_DIR}/bin"
-    linker.library_paths << "#{BUILD_DIR}/lib"
-    linker.library_paths << "#{BUILD_DIR}/mruby/build/mingw/lib"
-    linker.libraries += %w(opengl32 ws2_32 mingw32 SDL2main SDL2 SDL2_image)
-    linker.flags_after_libraries << "-static-libgcc -mconsole"
+    linker.library_paths << "#{INSTALL_PREFIX}/lib"
+    # linker.libraries += %w(opengl32 ws2_32 mingw32 SDL2main SDL2 SDL2_image)
+    linker.libraries += %w(ws2_32)
+    linker.flags_after_libraries << "#{INSTALL_PREFIX}/lib/libSDL2_image.a -lmingw32 #{INSTALL_PREFIX}/lib/libSDL2main.a #{INSTALL_PREFIX}/lib/libSDL2.a -mwindows  -Wl,--dynamicbase -Wl,--nxcompat -Wl,--high-entropy-va -lm -ldinput8 -ldxguid -ldxerr8 -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lsetupapi -lversion -luuid"
+    linker.flags_after_libraries << " -static-libgcc -mconsole"
   end
 
   conf.exts do |exts|

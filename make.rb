@@ -22,7 +22,7 @@ COMMON_DOWNLOADS = %w(
 )
 DOWNLOADS = {
   "linux" => %w(
-    https://github.com/bismite/SDL-binaries/releases/download/linux-1.0.8/SDL-linux-1.0.8.tgz
+    https://github.com/bismite/SDL-binaries/releases/download/linux-1.0.9/SDL-linux-1.0.9.tgz
   ),
   "macos-arm64" => %w(
     https://github.com/bismite/SDL-binaries/releases/download/macos-arm64-1.0.7/SDL-macos-arm64-1.0.7.tgz
@@ -68,8 +68,13 @@ ENV["MRUBY_CONFIG"] = File.absolute_path "mruby_config/#{TARGET}.rb"
 ENV["ARCH"] = "arm64"  if TARGET.end_with?("-arm64")
 ENV["ARCH"] = "x86_64" if TARGET.end_with?("-x86_64")
 ENV["MRUBY_CONFIG"] = File.absolute_path "mruby_config/macos.rb" if TARGET.start_with?("macos")
-rm ENV["MRUBY_CONFIG"]+".lock"
-Dir.chdir("#{PREFIX}/mruby-3.2.0"){ run "rake" }
+rm ENV["MRUBY_CONFIG"]+".lock" rescue nil
+cp "src/mruby-patch.diff", "#{PREFIX}/#{MRUBY}"
+Dir.chdir("#{PREFIX}/#{MRUBY}"){
+  # Patch to mruby
+  run "patch -p1 -i mruby-patch.diff"
+  run "rake"
+}
 # install mruby
 Dir.chdir(PREFIX){
   cp_r "#{MRUBY}/include", "./"
@@ -104,11 +109,12 @@ Dir.chdir(PREFIX){
     run "clang #{CFLAGS} -arch #{arch} sprite-sheeter.c -o #{EXE_NAME} #{DEFINES} #{INCLUDE} -Llib -lmruby lib/libSDL2.a lib/libSDL2_image.a -liconv -lm -framework OpenGL -Wl,-framework,CoreAudio -Wl,-framework,AudioToolbox -Wl,-weak_framework,CoreHaptics -Wl,-weak_framework,GameController -Wl,-framework,ForceFeedback -lobjc -Wl,-framework,CoreVideo -Wl,-framework,Cocoa -Wl,-framework,Carbon -Wl,-framework,IOKit -Wl,-weak_framework,QuartzCore -Wl,-weak_framework,Metal"
     run "strip #{EXE_NAME}"
   when "linux"
-    run "clang -Wall -O2 -std=gnu11 sprite-sheeter.c -o #{EXE_NAME} #{DEFINES} -Iinclude -Llib -lmruby -lm `sdl2-config --cflags --libs` -lSDL2_image"
+    libs = "lib/libSDL2.a lib/libSDL2_image.a -pthread -lm -lrt"
+    run "clang #{CFLAGS} sprite-sheeter.c -o #{EXE_NAME} #{DEFINES} #{INCLUDE} -Llib -lmruby #{libs}"
     run "strip #{EXE_NAME}"
   when "mingw"
-    slibs = %w(mruby SDL2main SDL2 SDL2_image).map{|l| "lib/lib#{l}.a" }.join(" ")
-    run "x86_64-w64-mingw32-gcc sprite-sheeter.c -o #{EXE_NAME} #{DEFINES} -Iinclude -Iinclude/SDL2 -Llib -lmingw32 -lmruby #{slibs} -lopengl32 -lws2_32 -mwindows -Wl,--dynamicbase -Wl,--nxcompat -Wl,--high-entropy-va -lm -ldinput8 -ldxguid -ldxerr8 -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lsetupapi -lversion -luuid"
+    libs = %w(mruby SDL2main SDL2 SDL2_image).map{|l| "lib/lib#{l}.a" }.join(" ")
+    run "x86_64-w64-mingw32-gcc sprite-sheeter.c -o #{EXE_NAME} #{DEFINES} #{INCLUDE} -Llib -lmingw32 #{libs} -lopengl32 -lws2_32 -mwindows -Wl,--dynamicbase -Wl,--nxcompat -Wl,--high-entropy-va -lm -ldinput8 -ldxguid -ldxerr8 -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lsetupapi -lversion -luuid"
     run "x86_64-w64-mingw32-strip #{EXE_NAME}"
   end
 }

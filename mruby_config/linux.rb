@@ -1,6 +1,8 @@
 require_relative "common.rb"
 
-SCRIPTS_DIR = File.expand_path File.join __dir__, "..", "..", "scripts"
+INSTALL_PREFIX = "#{BUILD_DIR}/linux"
+LIBS = %w(SDL2 SDL2_image)
+INCLUDES = %w(include include/SDL2).map{|i| "#{INSTALL_PREFIX}/#{i}" }
 
 MRuby::Build.new do |conf|
   toolchain :clang
@@ -13,15 +15,14 @@ MRuby::CrossBuild.new('linux') do |conf|
 
   conf.cc do |cc|
     cc.command = 'clang'
-    cc.defines += %w(MRB_INT64 MRB_UTF8_STRING MRB_NO_BOXING)
-    cc.include_paths << "#{BUILD_DIR}/include"
-    cc.flags = %W(-Os -std=gnu11 -Wall -Werror-implicit-function-declaration -Wwrite-strings)
-    cc.flags << "`sdl2-config --cflags`"
+    cc.defines += COMMON_DEFINES
+    cc.include_paths += INCLUDES
+    cc.flags = COMMON_CFLAGS
   end
 
   conf.linker do |linker|
     linker.command = "clang"
-    linker.library_paths += [ "#{BUILD_DIR}/lib", "#{BUILD_DIR}/mruby/build/linux/lib"]
-    linker.libraries += %W(SDL2 SDL2_image)
+    linker.library_paths += [ "#{INSTALL_PREFIX}/lib" ]
+    linker.libraries += LIBS
   end
 end
