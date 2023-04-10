@@ -45,7 +45,7 @@ This command refers to `config.json` and `crop.json` in the source directory.
 ```
 
 # Changelog
-## 4.0.1 2023/04/10
+## 4.0.2 2023/04/10
 - license change to MIT License
 - update mruby 3.2.0, SDL-2.26.5, SDL_image 2.6.3
 ## 3.0.0 2022/11/15
