@@ -12,6 +12,8 @@
 #include <mruby/class.h>
 #include <mruby/string.h>
 #include <mruby/variable.h>
+#include <mruby/error.h>
+#include <mruby/presym.h>
 
 #include <SDL_image.h>
 #include "sprite-sheeter.h"
@@ -251,6 +253,7 @@ int main(int argc, char* argv[])
   // Run
   mrb_value obj = mrb_load_irep(mrb,code);
   if (mrb->exc) {
+    MRB_EXC_CHECK_EXIT(mrb, mrb->exc);
     printf("exception:\n");
     if (mrb_undef_p(obj)) {
       mrb_p(mrb, mrb_obj_value(mrb->exc));
