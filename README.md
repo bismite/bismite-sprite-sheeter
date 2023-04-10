@@ -45,12 +45,15 @@ This command refers to `config.json` and `crop.json` in the source directory.
 ```
 
 # Changelog
+## 4.0.0 2023/04/10
+- license change to MIT License
+- update mruby 3.2.0, SDL-2.26.5, SDL_image 2.6.3
 ## 3.0.0 2022/11/15
 - remove msgpack output
 ## 2.0.3 2022/11/12
 - SDL update(macos/mingw)
 
 # License
-Copyright 2021-2022 kbys <work4kbys@gmail.com>
+Copyright (c) 2021 kbys <work4kbys@gmail.com>
 
-Apache License Version 2.0
+MIT License

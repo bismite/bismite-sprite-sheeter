@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require_relative "utils"
+require "fileutils"
 
 class Compile
   attr_reader :included_files, :line_count, :index, :code
@@ -140,7 +140,7 @@ end
 # compile
 INFILE=ARGV[0]
 OUTFILE=ARGV[1]
-compile = Compile.new INFILE, ["build/bin_packing-0.2.0/lib"]
+compile = Compile.new INFILE, ["bin_packing-0.2.0/lib"]
 
 begin
   compile.run
@@ -148,5 +148,5 @@ rescue SyntaxError => e
   exit 1
 end
 
-mkdir_p File.dirname OUTFILE
+FileUtils::mkdir_p File.dirname OUTFILE
 File.open(OUTFILE,"wb").write(compile.code)

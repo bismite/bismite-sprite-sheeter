@@ -1,3 +1,27 @@
+bismite-sprite-sheeter
+  Copyright (c) 2021 kbys <work4kbys@gmail.com>
+bin_packing
+  Copyright (c) 2016 MAK IT <info@makit.lv>
+mruby
+  Copyright (c) 2010 mruby developers
+mruby-dir
+  Copyright (c) 2012 Internet Initiative Japan Inc.
+mruby-errno
+  Copyright (c) 2013 Internet Initiative Japan Inc.
+mruby-iijson
+  Copyright (c) 2014 Internet Initiative Japan Inc.
+mruby-io
+  Copyright (c) 2013 Internet Initiative Japan Inc.
+  Copyright (c) 2017 mruby developers
+mruby-pack
+  Copyright (c) 2012 Internet Initiative Japan Inc.
+  Copyright (c) 2017 mruby developers
+mruby-set
+  Copyright (c) yui-knk 2016
+mruby-socket
+  Copyright (c) 2013 Internet Initiative Japan Inc.
+  Copyright (c) 2017 mruby developers
+
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the "Software"),
 to deal in the Software without restriction, including without limitation
