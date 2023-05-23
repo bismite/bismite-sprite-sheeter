@@ -62,6 +62,7 @@ def sort_by_random(boxes)
 end
 
 def pack_dat(filename,b,crop_geometry)
+  return nil unless b.img.canvas_number
   crop_geometry = [ b.img.crop_x,b.img.crop_y,b.img.w,b.img.h ] unless crop_geometry
   [
     filename,
@@ -75,7 +76,7 @@ end
 # initialize
 #
 if ARGV.size!=2
-  puts "bismite-sprite-sheeter 4.0.2"
+  puts "bismite-sprite-sheeter 4.0.3"
   puts "usage: bismite-sprite-sheeter srcdir dstdir"
   exit 1
 end
@@ -185,7 +186,7 @@ loop do
   puts "#{img_name} saved."
 
   # Dat
-  dat += boxes.map{|b| pack_dat( b.filename, b, crop_list[b.filename] ) }
+  dat += boxes.map{|b| pack_dat( b.filename, b, crop_list[b.filename] ) }.compact
 
   #
   unless remaining_boxes.empty?
@@ -199,7 +200,7 @@ end
 #
 # Duplicated
 #
-dat += dups.map{|d| pack_dat( d.filename, crc_to_box[d.img.crc], crop_list[d.filename] ) }
+dat += dups.map{|d| pack_dat( d.filename, crc_to_box[d.img.crc], crop_list[d.filename] ) }.compact
 
 #
 # Save

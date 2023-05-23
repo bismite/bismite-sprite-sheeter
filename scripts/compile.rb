@@ -29,6 +29,7 @@ DEFINES = %w(
   -DMRB_NO_BOXING
   -DMRB_NO_DEFAULT_RO_DATA_P
   -DMRB_STR_LENGTH_MAX=0
+  -DMRB_ARY_LENGTH_MAX=0
 ).join(" ")
 CFLAGS = %w(-Wall -Werror-implicit-function-declaration -Wwrite-strings -std=gnu11 -O3 -g0).join(" ")
 

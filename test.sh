@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 case `uname -s` in
 Linux)

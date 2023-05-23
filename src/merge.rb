@@ -66,7 +66,7 @@ EOS
     filepath = nil
     @load_path.find{|l|
       f = File.join(l,filename)
-      if File.exists? f
+      if File.exist? f
         filepath = f
         break
       end
