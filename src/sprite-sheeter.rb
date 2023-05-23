@@ -76,7 +76,7 @@ end
 # initialize
 #
 if ARGV.size!=2
-  puts "bismite-sprite-sheeter 4.0.3"
+  puts "bismite-sprite-sheeter 4.0.4"
   puts "usage: bismite-sprite-sheeter srcdir dstdir"
   exit 1
 end

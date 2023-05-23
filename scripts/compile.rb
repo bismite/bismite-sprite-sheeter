@@ -14,9 +14,9 @@ EXE_NAME="bismite-sprite-sheeter"+(TARGET=="mingw"?".exe":"")
 #
 cp "src/sprite-sheeter.c", PREFIX
 cp "src/sprite-sheeter.rb", PREFIX
-cp "src/merge.rb", PREFIX
+cp "scripts/merge.rb", PREFIX
 Dir.chdir(PREFIX){
-  run "./merge.rb sprite-sheeter.rb compiled.rb"
+  run "ruby merge.rb sprite-sheeter.rb compiled.rb"
 }
 run "#{PREFIX}/mruby/bin/mrbc -B code -o #{PREFIX}/sprite-sheeter.h #{PREFIX}/compiled.rb"
 

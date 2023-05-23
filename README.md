@@ -45,7 +45,7 @@ This command refers to `config.json` and `crop.json` in the source directory.
 ```
 
 # Changelog
-## 4.0.3 2023/05/23
+## 4.0.4 2023/05/23
 - fix: care when sheet index is null.
 ## 4.0.2 2023/04/10
 - license change to MIT License
